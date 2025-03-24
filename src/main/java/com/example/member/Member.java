@@ -1,15 +1,12 @@
 package com.example.member;
+
 import jakarta.persistence.*;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.Email;
 import org.springframework.format.annotation.DateTimeFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "members")
-public class member {
+public class Member {
     @Id
     @SequenceGenerator(name = "member_sequence", sequenceName = "member_sequence", allocationSize = 1, initialValue = 4)
     @GeneratedValue(generator = "member_sequence")
@@ -27,18 +24,19 @@ public class member {
     private String phone;
 
     @DateTimeFormat
-    private String start_date;
+    @Column(name = "start_date") // Mapping to database column if it's named start_date
+    private String startDate;
 
     private int duration;
 
-    public member() {}
+    public Member() {}
 
-    public member(String name, String address, String email, String phone, String start_date, int duration) {
+    public Member(String name, String address, String email, String phone, String startDate, int duration) {
         this.name = name;
         this.address = address;
         this.email = email;
         this.phone = phone;
-        this.start_date = start_date;
+        this.startDate = startDate;
         this.duration = duration;
     }
 
@@ -82,12 +80,12 @@ public class member {
         this.phone = phone;
     }
 
-    public String getStart_date() {
-        return start_date;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(String start_date) {
-        this.start_date = start_date;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public int getDuration() {
@@ -98,3 +96,4 @@ public class member {
         this.duration = duration;
     }
 }
+
